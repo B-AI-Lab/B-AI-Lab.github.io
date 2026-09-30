@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Morris Gellisch | Biosignals, AI & Medical Education</title>
+
+  <meta
+    name="description"
+    content="Morris Gellisch develops transparent, context-aware infrastructures for physiological data and AI in health and medical education."
+  />
+
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --bg-soft: #ebe7dd;
+      --surface: #faf8f3;
+      --text: #232522;
+      --muted: #73776f;
+      --line: rgba(35, 37, 34, 0.13);
+      --sage: #7f8b78;
+      --sage-dark: #566153;
+      --white: #ffffff;
+
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont,
+              "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* NAVIGATION */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(244, 241, 234, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .brand {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 83vh;
+      display: flex;
+      align-items: center;
+      padding: 110px 0 90px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 80px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(4rem, 8vw, 7.6rem);
+      line-height: 0.94;
+      letter-spacing: -0.055em;
+      max-width: 900px;
+    }
+
+    .hero-statement {
+      margin-top: 38px;
+      max-width: 760px;
+      font-family: var(--serif);
+      font-size: clamp(1.45rem, 2.3vw, 2.15rem);
+      line-height: 1.35;
+      color: #3d413c;
+    }
+
+    .hero-meta {
+      border-left: 1px solid var(--line);
+      padding-left: 34px;
+      padding-bottom: 10px;
+    }
+
+    .hero-meta p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 22px;
+    }
+
+    .hero-meta strong {
+      display: block;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid var(--text);
+      font-size: 0.82rem;
+      transition: all 0.2s ease;
+    }
+
+    .button.primary {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    .button.primary:hover {
+      background: #3b3e39;
+    }
+
+    .button.secondary:hover {
+      background: var(--surface);
+    }
+
+    /* GENERAL SECTIONS */
+
+    section {
+      padding: 120px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 0.55fr 1.45fr;
+      gap: 80px;
+      margin-bottom: 70px;
+    }
+
+    .section-number {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.045em;
+    }
+
+    .lead {
+      font-family: var(--serif);
+      font-size: clamp(1.45rem, 2.2vw, 2rem);
+      line-height: 1.45;
+      color: #3f433e;
+      max-width: 850px;
+      margin-top: 32px;
+    }
+
+    /* RESEARCH */
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .research-card {
+      min-height: 390px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .research-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 55px rgba(30, 32, 28, 0.07);
+    }
+
+    .card-number {
+      color: var(--sage-dark);
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+    }
+
+    .research-card h3 {
+      font-family: var(--serif);
+      font-size: 2rem;
+      line-height: 1.05;
+      font-weight: 400;
+      margin-bottom: 18px;
+    }
+
+    .research-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
+
+    /* FLOW */
+
+    .flow {
+      margin-top: 90px;
+      padding: 54px;
+      background: var(--sage-dark);
+      color: #f7f5ef;
+      border-radius: 28px;
+    }
+
+    .flow-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      opacity: 0.68;
+      margin-bottom: 32px;
+    }
+
+    .flow-line {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 3vw, 3rem);
+      line-height: 1.45;
+      letter-spacing: -0.025em;
+    }
+
+    .flow-line span {
+      opacity: 0.5;
+      padding: 0 8px;
+    }
+
+    /* PROJECTS */
+
+    .project {
+      display: grid;
+      grid-template-columns: 0.45fr 1fr 0.45fr;
+      gap: 40px;
+      padding: 38px 0;
+      border-top: 1px solid var(--line);
+      align-items: start;
+    }
+
+    .project:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .project-category {
+      color: var(--sage-dark);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .project h3 {
+      font-family: var(--serif);
+      font-size: 1.65rem;
+      font-weight: 400;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .project p {
+      color: var(--muted);
+      max-width: 680px;
+    }
+
+    .project-status {
+      text-align: right;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    /* SOFTWARE */
+
+    .software-panel {
+      background: #272a26;
+      color: #f5f2eb;
+      border-radius: 30px;
+      padding: 70px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 90px;
+    }
+
+    .software-panel h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.5rem, 4vw, 4.2rem);
+      line-height: 1.03;
+      letter-spacing: -0.04em;
+    }
+
+    .software-panel p {
+      color: rgba(245, 242, 235, 0.68);
+      font-size: 0.98rem;
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .software-list {
+      margin-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .software-item {
+      padding: 17px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      font-size: 0.9rem;
+    }
+
+    /* PUBLICATIONS */
+
+    .publication {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 32px;
+      padding: 30px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .publication:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .publication-year {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .publication-title {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      line-height: 1.35;
+    }
+
+    .publication-note {
+      color: var(--muted);
+      margin-top: 8px;
+      font-size: 0.88rem;
+    }
+
+    /* PRESS */
+
+    .press-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .press-card {
+      min-height: 260px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .press-card small {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--sage-dark);
+    }
+
+    .press-card h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.65rem;
+      line-height: 1.2;
+    }
+
+    /* COLLABORATE */
+
+    .collaborate {
+      text-align: center;
+      padding: 150px 0;
+    }
+
+    .collaborate h2 {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .collaborate p {
+      max-width: 720px;
+      margin: 34px auto;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 42px 0 54px;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+    }
+
+    .footer-name {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      margin-bottom: 7px;
+    }
+
+    .footer-small {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid,
+      .section-head,
+      .software-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid,
+      .section-head {
+        gap: 40px;
+      }
+
+      .hero-meta {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        padding: 28px 0 0;
+      }
+
+      .research-grid,
+      .press-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .project-status {
+        text-align: left;
+      }
+
+      .software-panel {
+        padding: 40px 28px;
+        gap: 45px;
+      }
+
+      .publication {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .flow {
+        padding: 36px 28px;
+      }
+
+      section {
+        padding: 90px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#top">Morris Gellisch</a>
+
+      <div class="nav-links">
+        <a href="#vision">Research Vision</a>
+        <a href="#projects">Projects</a>
+        <a href="#software">Software</a>
+        <a href="#publications">Publications</a>
+        <a href="#media">Media & Press</a>
+        <a href="#collaborate">Collaborate</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="container hero-grid">
+
+        <div>
+          <div class="eyebrow">
+            Biosignals · Artificial Intelligence · Medical Education
+          </div>
+
+          <h1>Morris<br>Gellisch</h1>
+
+          <p class="hero-statement">
+            Building transparent, context-aware infrastructures for
+            physiological data and artificial intelligence in health,
+            learning and clinical environments.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button primary" href="#vision">Explore Research</a>
+            <a class="button secondary" href="#software">View Software</a>
+          </div>
+        </div>
+
+        <aside class="hero-meta">
+          <p>
+            <strong>Dr. rer. nat. Morris Gellisch, M.Ed., M.Sc.</strong>
+            Researcher working at the intersection of physiology,
+            digital health and medical education.
+          </p>
+
+          <p>
+            <strong>B-AI Lab</strong>
+            Biosignal acquisition, contextualized data infrastructure
+            and transparent computational inference.
+          </p>
+
+          <p>
+            <strong>Based in Germany</strong>
+            Open to scientific, clinical and technological collaboration.
+          </p>
+        </aside>
+
+      </div>
+    </header>
+
+    <!-- RESEARCH VISION -->
+    <section id="vision">
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-number">01 · Research Vision</div>
+
+          <div>
+            <h2>From physiological signals to meaningful context.</h2>
+
+            <p class="lead">
+              My research explores how continuous physiological data can be
+              transformed into transparent, contextualized and inference-ready
+              information — creating reproducible foundations for artificial
+              intelligence in medicine and medical education.
+            </p>
+          </div>
+        </div>
+
+        <div class="research-grid">
+
+          <article class="research-card">
+            <div class="card-number">01</div>
+            <div>
+              <h3>Biosignal Intelligence</h3>
+              <p>
+                Continuous ECG, PPG, EEG, EDA and heart-rate variability
+                as windows into physiological adaptation, stress and
+                human performance.
+              </p>
+            </div>
+          </article>
+
+          <article class="research-card">
+            <div class="card-number">02</div>
+            <div>
+              <h3>AI-ready Health Data Infrastructure</h3>
+              <p>
+                Transparent pipelines for synchronized acquisition,
+                preprocessing, contextualization and transformation of
+                physiological streams into machine-readable data objects.
+              </p>
+            </div>
+          </article>
+
+          <article class="research-card">
+            <div class="card-number">03</div>
+            <div>
+              <h3>Stress, Learning & Medical Education</h3>
+              <p>
+                Physiological and computational approaches to understanding
+                stress, performance, simulation and learning in medical
+                education.
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="flow">
+          <div class="flow-label">Research architecture</div>
+
+          <div class="flow-line">
+            Sensors
+            <span>→</span>
+            Signals
+            <span>→</span>
+            Synchronization
+            <span>→</span>
+            Context
+            <span>→</span>
+            Data Objects
+            <span>→</span>
+            AI & Inference
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-number">02 · Current Projects</div>
+
+          <div>
+            <h2>Research in motion.</h2>
+            <p class="lead">
+              Selected projects connecting physiological measurement,
+              computational infrastructure and real-world clinical or
+              educational environments.
+            </p>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="project-category">Infrastructure</div>
+
+          <div>
+            <h3>Real-time physiological data infrastructure</h3>
+            <p>
+              A software architecture for transforming continuous physiological
+              streams into synchronized, contextualized and machine-readable
+              objects for downstream analysis and AI.
+            </p>
+          </div>
+
+          <div class="project-status">Ongoing</div>
+        </div>
+
+        <div class="project">
+          <div class="project-category">Clinical AI</div>
+
+          <div>
+            <h3>Multimodal physiological monitoring</h3>
+            <p>
+              Integrating ECG, PPG, EEG, EDA and contextual information to
+              investigate computational approaches to physiological state
+              recognition in clinical environments.
+            </p>
+          </div>
+
+          <div class="project-status">Ongoing</div>
+        </div>
+
+        <div class="project">
+          <div class="project-category">Medical Education</div>
+
+          <div>
+            <h3>Stress physiology in learning and assessment</h3>
+            <p>
+              Studying autonomic responses during simulation, problem-based
+              learning and assessment to understand how educational
+              environments shape physiological stress and performance.
+            </p>
+          </div>
+
+          <div class="project-status">Ongoing</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SOFTWARE -->
+    <section id="software">
+      <div class="container">
+
+        <div class="software-panel">
+
+          <div>
+            <div class="eyebrow" style="color:rgba(255,255,255,.55)">
+              Software
+            </div>
+
+            <h3>
+              Infrastructure before inference.
+            </h3>
+          </div>
+
+          <div>
+            <p>
+              Reliable artificial intelligence starts before model training.
+              The B-AI software framework is designed around transparent
+              acquisition, preprocessing, synchronization and contextualization
+              of continuous physiological data.
+            </p>
+
+            <p>
+              The aim is to create auditable and reproducible data pathways
+              that remain interpretable from the original signal to downstream
+              computational inference.
+            </p>
+
+            <div class="software-list">
+              <div class="software-item">Real-time biosignal streaming</div>
+              <div class="software-item">Transparent signal processing</div>
+              <div class="software-item">Event and context synchronization</div>
+              <div class="software-item">Machine-readable data objects</div>
+              <div class="software-item">AI and ML integration</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications">
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-number">03 · Publications</div>
+
+          <div>
+            <h2>Selected work.</h2>
+            <p class="lead">
+              Research spanning physiological computing, stress physiology,
+              digital health and medical education.
+            </p>
+          </div>
+        </div>
+
+        <div class="publication">
+          <div class="publication-year">2026</div>
+          <div>
+            <div class="publication-title">
+              Selected publication title will appear here.
+            </div>
+            <div class="publication-note">
+              Physiological computing · Digital health
+            </div>
+          </div>
+        </div>
+
+        <div class="publication">
+          <div class="publication-year">2026</div>
+          <div>
+            <div class="publication-title">
+              Selected publication title will appear here.
+            </div>
+            <div class="publication-note">
+              Medical education · Stress physiology
+            </div>
+          </div>
+        </div>
+
+        <div class="publication">
+          <div class="publication-year">2025</div>
+          <div>
+            <div class="publication-title">
+              Selected publication title will appear here.
+            </div>
+            <div class="publication-note">
+              Heart-rate variability · Real-time infrastructure
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MEDIA -->
+    <section id="media">
+      <div class="container">
+
+        <div class="section-head">
+          <div class="section-number">04 · Media & Press</div>
+
+          <div>
+            <h2>Research beyond the paper.</h2>
+            <p class="lead">
+              Selected features, institutional coverage and public-facing
+              communication around ongoing research.
+            </p>
+          </div>
+        </div>
+
+        <div class="press-grid">
+
+          <article class="press-card">
+            <small>Press</small>
+            <h3>Research feature</h3>
+            <p class="publication-note">
+              Institutional coverage will appear here.
+            </p>
+          </article>
+
+          <article class="press-card">
+            <small>Talks</small>
+            <h3>Invited talks & scientific communication</h3>
+            <p class="publication-note">
+              Selected talks and presentations.
+            </p>
+          </article>
+
+          <article class="press-card">
+            <small>Media</small>
+            <h3>Public engagement</h3>
+            <p class="publication-note">
+              Interviews, podcasts and other formats.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- COLLABORATE -->
+    <section id="collaborate" class="collaborate">
+      <div class="container">
+
+        <div class="section-number" style="margin-bottom:30px">
+          05 · Collaborate
+        </div>
+
+        <h2>
+          Good research becomes more interesting when disciplines meet.
+        </h2>
+
+        <p>
+          I am interested in collaborations involving continuous biosignal
+          acquisition, multimodal physiological data, transparent AI,
+          digital health infrastructure and medical education research.
+        </p>
+
+        <a class="button primary" href="mailto:YOUR-EMAIL-HERE">
+          Get in touch
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+
+      <div>
+        <div class="footer-name">Morris Gellisch</div>
+        <div class="footer-small">
+          Biosignals · AI · Digital Health · Medical Education
+        </div>
+      </div>
+
+      <div class="footer-small">
+        © 2026 Morris Gellisch
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "editorial_roles": [
+    {
+      "journal": "Frontiers in Digital Health",
+      "publisher": "Frontiers",
+      "role": "Editor",
+      "research_topic": "AI-Driven Interpretation of Human Physiology in Health, Medicine, and Education",
+      "impact_factor_as_listed_in_cv": "3.8 (2025)"
+    },
+    {
+      "journal": "Frontiers in Medicine",
+      "publisher": "Frontiers",
+      "role": "Editor",
+      "impact_factor_as_listed_in_cv": "3.00 (2025)"
+    },
+    {
+      "journal": "Frontiers in Psychiatry",
+      "publisher": "Frontiers",
+      "role": "Editor",
+      "section": "Digital Mental Health",
+      "impact_factor_as_listed_in_cv": "3.80 (2026)"
+    }
+  ],
+  "display_note": "Impact factors are retained from the CV for reference but should not be shown prominently on the website by default."
+}

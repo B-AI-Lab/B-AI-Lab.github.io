@@ -1,16 +1,322 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>B.AI LAB | Biobehavioral Artificial Intelligence</title>
 
-  <title>Morris Gellisch | Biosignals, AI & Medical Education</title>
+<meta
+  name="description"
+  content="B.AI Lab develops transparent infrastructures for synchronized, contextualized and AI-ready physiological data."
+/>
+/* ==================================================
+   B.AI LAB — V3
+================================================== */
 
-  <meta
-    name="description"
-    content="Morris Gellisch develops transparent, context-aware infrastructures for physiological data and artificial intelligence in health, clinical research and medical education."
-  />
+:root {
+  --bai-violet: #7c3aed;
+  --bai-violet-light: #a78bfa;
+  --bai-blue: #3b82f6;
+  --bai-ink: #20232b;
+  --bai-muted: #777b8d;
+  --bai-paper: #ffffff;
+  --bai-soft: #f8f7ff;
+  --bai-line: rgba(52, 42, 90, 0.12);
+}
 
+/* Navigation */
+
+nav {
+  background: rgba(255,255,255,.9);
+  border-bottom: 1px solid var(--bai-line);
+}
+
+.brand {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+
+.nav-links a:hover {
+  color: var(--bai-violet);
+}
+
+
+/* HERO */
+
+.lab-hero {
+  background:
+    radial-gradient(circle at 78% 52%, rgba(59,130,246,.07), transparent 28%),
+    radial-gradient(circle at 67% 45%, rgba(124,58,237,.07), transparent 25%),
+    #fff;
+
+  min-height: calc(100vh - 78px);
+  display: flex;
+  align-items: center;
+  padding: 58px 0 82px;
+  overflow: hidden;
+}
+
+.lab-hero-inner {
+  text-align: center;
+}
+
+.lab-kicker {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  color: var(--bai-violet);
+  margin-bottom: 18px;
+}
+
+.lab-logo-stage {
+  width: min(1180px, 100%);
+  aspect-ratio: 3.25 / 1;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.lab-logo-stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.lab-claim {
+  max-width: 770px;
+  margin: 20px auto 0;
+  font-size: clamp(1.35rem, 2.3vw, 2.05rem);
+  line-height: 1.42;
+  letter-spacing: -.025em;
+  color: var(--bai-ink);
+}
+
+.lab-claim strong {
+  font-weight: 500;
+  background: linear-gradient(
+    90deg,
+    var(--bai-violet),
+    var(--bai-blue)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.lab-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.lab-actions .primary {
+  border-color: transparent;
+  background: linear-gradient(
+    100deg,
+    #6328c7,
+    #3b82f6
+  );
+}
+
+.lab-actions .secondary {
+  border-color: rgba(32,35,43,.3);
+}
+
+.lab-meta {
+  margin-top: 31px;
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  color: var(--bai-muted);
+  font-size: .76rem;
+  letter-spacing: .04em;
+}
+
+.lab-meta strong {
+  color: var(--bai-ink);
+  font-weight: 500;
+}
+
+
+/* MORRIS / LEADERSHIP */
+
+.leadership {
+  background: #fbfaf7;
+  padding: 115px 0;
+}
+
+.leadership-grid {
+  display: grid;
+  grid-template-columns: .78fr 1.22fr;
+  gap: 90px;
+  align-items: center;
+}
+
+.leadership-photo {
+  position: relative;
+}
+
+.leadership-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 4px;
+  filter: saturate(.88) contrast(.96);
+}
+
+.leadership-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.02),
+    rgba(124,58,237,.055)
+  );
+}
+
+.leadership-kicker {
+  color: var(--bai-violet);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font-size: .68rem;
+  margin-bottom: 18px;
+}
+
+.leadership h2 {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 4.5vw, 4.8rem);
+  letter-spacing: -.055em;
+  line-height: 1.02;
+}
+
+.leadership-name {
+  margin-top: 30px;
+  font-weight: 600;
+}
+
+.leadership-role {
+  color: var(--bai-muted);
+  margin-top: 4px;
+  font-size: .9rem;
+}
+
+.leadership-text {
+  margin-top: 28px;
+  max-width: 680px;
+  color: var(--bai-muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+
+/* SOFTWARE V3 */
+
+.software-v3 {
+  background: #fff;
+}
+
+.software-panel-v3 {
+  position: relative;
+  overflow: hidden;
+  padding: 75px;
+  border: 1px solid var(--bai-line);
+  background:
+    radial-gradient(circle at 88% 20%, rgba(59,130,246,.09), transparent 28%),
+    radial-gradient(circle at 72% 15%, rgba(124,58,237,.09), transparent 24%),
+    #fff;
+
+  border-radius: 28px;
+}
+
+.software-label {
+  font-size: .68rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--bai-violet);
+  margin-bottom: 32px;
+}
+
+.software-mantra {
+  font-size: clamp(2.7rem, 5.1vw, 5.6rem);
+  line-height: .98;
+  letter-spacing: -.06em;
+  font-weight: 400;
+  color: var(--bai-ink);
+  max-width: 1000px;
+}
+
+.software-mantra .accent {
+  background: linear-gradient(
+    90deg,
+    var(--bai-violet),
+    var(--bai-blue)
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.software-subline {
+  max-width: 820px;
+  margin-top: 38px;
+  color: var(--bai-muted);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.software-subline strong {
+  color: var(--bai-ink);
+  font-weight: 600;
+}
+
+.event-strip {
+  margin-top: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.event-chip {
+  padding: 9px 14px;
+  border: 1px solid var(--bai-line);
+  border-radius: 999px;
+  font-size: .75rem;
+  color: var(--bai-ink);
+  background: rgba(255,255,255,.72);
+}
+
+.event-explanation {
+  margin-top: 18px;
+  font-size: .8rem;
+  color: var(--bai-muted);
+}
+
+
+@media (max-width: 900px) {
+  .lab-logo-stage {
+    aspect-ratio: 2.15 / 1;
+  }
+
+  .lab-meta {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .leadership-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .software-panel-v3 {
+    padding: 45px 26px;
+  }
+
+  .software-mantra {
+    font-size: clamp(2.5rem, 10vw, 4.3rem);
+  }
+}
   <style>
 
     /* --------------------------------------------------

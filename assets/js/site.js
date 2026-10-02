@@ -7,7 +7,7 @@
 
 const SITE_CONFIG = {
   // Add one email here before deployment, e.g. "name@university.de".
-  email: "",
+  email: "morris.gellisch@ruhr-uni-bochum.de",
 
   data: {
     publications: "assets/research/publications.json",

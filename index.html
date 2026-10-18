@@ -122,7 +122,10 @@
               <span class="showcase-console-separator" aria-hidden="true">/</span>
               <span id="showcaseCurrentDomain">Clinical &amp; Ambulatory Assessment</span>
             </div>
-            <span class="showcase-demo-label">Synthetic data · Software demonstration</span>
+            <div class="showcase-console-navigation" id="showcaseConsoleNavigation">
+              <span class="showcase-demo-label">Synthetic data · Software demonstration</span>
+              <button id="showcaseReset" type="button" class="showcase-reset" hidden>← Back to Overview</button>
+            </div>
           </div>
           <div class="showcase-screen">
             <video id="showcaseMainVideo" muted loop playsinline preload="metadata" poster="assets/images/video-posters/overview.jpg"
@@ -138,7 +141,6 @@
             <p id="showcaseCurrentDescription" aria-live="polite" aria-atomic="true">Integrated monitoring across clinical environments and daily life.</p>
             <button id="showcaseExpand" type="button" class="showcase-reset showcase-expand" aria-haspopup="dialog" aria-controls="showcaseViewer">View larger ↗</button>
             <button id="showcaseMotion" type="button" class="showcase-reset" aria-pressed="false">Pause animations</button>
-            <button id="showcaseReset" type="button" class="showcase-reset" hidden>← Back to System Overview</button>
           </div>
         </div>
 
@@ -176,12 +178,12 @@
             <div class="showcase-domain-heading">
               <div>
                 <p class="showcase-domain-overline">02 / EVERYDAY ENVIRONMENT</p>
-                <h3 id="ambulatoryDomainTitle">Contextual Health Monitoring</h3>
-                <p>Home-based physiological assessment.</p>
+                <h3 id="ambulatoryDomainTitle">Monitoring at Home</h3>
+                <p>Contextualized physiological assessment at home</p>
               </div>
               <span class="showcase-domain-mark" aria-hidden="true">⌂</span>
             </div>
-            <button class="showcase-ambulatory-card" type="button" data-showcase-view="contextual" aria-label="Play Contextual Health Monitoring demonstration">
+            <button class="showcase-ambulatory-card" type="button" data-showcase-view="contextual" aria-label="Play Monitoring at Home demonstration">
               <span class="showcase-ambulatory-media">
                 <video class="showcase-preview-video" muted loop playsinline preload="none" aria-hidden="true"><source src="assets/video_data/BAI_Contextual_Health_Monitoring_Loop.mp4" type="video/mp4"></video>
               </span>

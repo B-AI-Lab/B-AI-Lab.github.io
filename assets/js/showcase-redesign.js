@@ -39,6 +39,8 @@
   const domain = document.getElementById("showcaseCurrentDomain");
   const description = document.getElementById("showcaseCurrentDescription");
   const reset = document.getElementById("showcaseReset");
+  const consoleNavigation = document.getElementById("showcaseConsoleNavigation");
+  const consolePanel = document.getElementById("showcaseConsole");
   const motionButton = document.getElementById("showcaseMotion");
   const expandButton = document.getElementById("showcaseExpand");
   const viewer = document.getElementById("showcaseViewer");
@@ -47,6 +49,7 @@
   const viewerError = document.getElementById("showcaseViewerError");
   const viewerClose = document.getElementById("showcaseViewerClose");
   const fullscreenButton = document.getElementById("showcaseFullscreen");
+  const viewerActions = document.querySelector(".showcase-viewer-actions");
   const controls = Array.from(document.querySelectorAll("[data-showcase-view]"));
   const previews = Array.from(document.querySelectorAll(".showcase-preview-video"));
   const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -105,30 +108,36 @@
       main.load();
     }
     main.setAttribute("aria-label", `${view.title} animated demonstration video`);
-    if (mainInView) playSafely(main);
+    if (mainInView && !viewer.open) playSafely(main);
 
     // Give keyboard and mobile visitors immediate feedback on their selection.
-    const rect = screen.getBoundingClientRect();
-    if (scroll && (rect.top < 0 || rect.bottom > window.innerHeight)) {
-      screen.scrollIntoView({ behavior: motion.matches ? "auto" : "smooth", block: "center" });
+    const rect = consolePanel.getBoundingClientRect();
+    const navBottom = document.querySelector(".site-nav").getBoundingClientRect().bottom;
+    if (scroll && (rect.top < navBottom || rect.bottom > window.innerHeight)) {
+      consolePanel.scrollIntoView({ behavior: motion.matches ? "auto" : "smooth", block: "start" });
     }
+  }
+
+  function loadViewerView(key, inlineTime = 0) {
+    const view = sources[key];
+    viewerTitle.textContent = view.title;
+    viewerVideo.setAttribute("aria-label", `${view.title} demonstration`);
+    viewerVideo.classList.toggle("is-contextual", key === "contextual");
+    viewerVideo.poster = `assets/images/video-posters/${key}.jpg`;
+    viewerError.hidden = true;
+    viewerVideo.src = view.url;
+    viewerVideo.load();
+    viewerVideo.onloadedmetadata = () => {
+      if (viewer.open && inlineTime > 0 && inlineTime < viewerVideo.duration) viewerVideo.currentTime = inlineTime;
+    };
   }
 
   function openViewer(invoker) {
     if (viewer.open) return;
     viewerInvoker = invoker;
-    const view = sources[selected];
-    viewerTitle.textContent = view.title;
-    viewerVideo.setAttribute("aria-label", `${view.title} demonstration`);
-    viewerVideo.classList.toggle("is-contextual", selected === "contextual");
-    viewerVideo.poster = `assets/images/video-posters/${selected}.jpg`;
-    viewerError.hidden = true;
-    viewerVideo.src = view.url;
-    viewerVideo.load();
-    const inlineTime = main.readyState >= 1 ? main.currentTime : 0;
-    viewerVideo.onloadedmetadata = () => {
-      if (viewer.open && inlineTime > 0 && inlineTime < viewerVideo.duration) viewerVideo.currentTime = inlineTime;
-    };
+    loadViewerView(selected, main.readyState >= 1 ? main.currentTime : 0);
+    // Reuse the same return control in the active viewer; never duplicate it.
+    viewerActions.prepend(reset);
     viewer.showModal();
     document.body.classList.add("viewer-open");
     syncPlayback();
@@ -144,6 +153,7 @@
     // Release the additional stream; the inline previews remain in place.
     viewerVideo.removeAttribute("src");
     viewerVideo.load();
+    consoleNavigation.append(reset);
     document.body.classList.remove("viewer-open");
     syncPlayback();
     viewerInvoker?.focus({ preventScroll: true });
@@ -162,7 +172,9 @@
 
   function updateViewerLabels() {
     controls.forEach(control => {
-      const label = sources[control.dataset.showcaseView].title;
+      const label = control.dataset.showcaseView === "contextual"
+        ? document.getElementById("ambulatoryDomainTitle").textContent
+        : sources[control.dataset.showcaseView].title;
       control.setAttribute("aria-label", mobileViewer.matches ? `Open ${label} in larger viewer` : `Play ${label} demonstration`);
       if (mobileViewer.matches) control.setAttribute("aria-haspopup", "dialog");
       else control.removeAttribute("aria-haspopup");
@@ -186,7 +198,18 @@
     setView(control.dataset.showcaseView, { scroll: !mobileViewer.matches });
     if (mobileViewer.matches) openViewer(control);
   }));
-  reset?.addEventListener("click", () => setView("overview"));
+  reset?.addEventListener("click", () => {
+    const inViewer = viewer.open;
+    setView("overview", { scroll: !inViewer });
+    if (inViewer) {
+      loadViewerView("overview");
+      playSafely(viewerVideo);
+      viewerClose.focus({ preventScroll: true });
+    } else {
+      title.tabIndex = -1;
+      title.focus({ preventScroll: true });
+    }
+  });
   motionButton.addEventListener("click", () => {
     animationsPaused = !animationsPaused;
     syncPlayback();

@@ -17,10 +17,13 @@
   <meta property="og:type" content="website" />
 
   <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/showcase-redesign.css" />
   <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/showcase-redesign.js" defer></script>
 </head>
 
 <body>
+  <a class="skip-link" href="#platform">Skip to platform</a>
 
   <!-- ============================================================
        SECTION 00 — NAVIGATION
@@ -34,8 +37,6 @@
 
       <div class="nav-links" id="navLinks">
         <a href="#platform">Platform</a>
-        <a href="#vision">Research Vision</a>
-        <a href="#projects">Projects</a>
         <a href="#leadership">Leadership</a>
         <a href="#publications">Publications</a>
         <a href="#service">Academic Service</a>
@@ -77,12 +78,11 @@
         </h1>
 
         <p class="hero-copy">
-          A transparent research infrastructure for continuous physiological data — connecting multimodal signals with the events, interventions and environments in which they occur.
+          A unified research platform for clinical and home-based physiological monitoring — connecting physiological signals, individual baselines and real-world events.
         </p>
 
         <div class="hero-actions">
-          <a class="button button-primary" href="#platform">Explore the platform</a>
-          <a class="button button-ghost" href="#vision">Research vision</a>
+          <a class="button button-primary" href="#platform">Explore the Platform <span aria-hidden="true">↗</span></a>
         </div>
 
         <div class="hero-meta" aria-label="Lab affiliation">
@@ -97,193 +97,104 @@
     <!-- ============================================================
          SECTION 02 — INTERACTIVE PLATFORM
          Default: system overview video.
-         Click hotspots or tabs to switch to HRV / EEG / Hemodynamics.
-         Video paths are configured in assets/js/site.js.
+         Application cards switch the main demonstration.
+         Video paths are configured in assets/js/showcase-redesign.js.
     ============================================================= -->
-    <section class="section platform-section" id="platform">
-      <div class="container">
-        <div class="section-heading split-heading">
+    <!-- ============================================================
+         SECTION 02 — PLATFORM SHOWCASE
+         Two domains, one platform. All videos are illustrative footage.
+    ============================================================= -->
+    <section class="section platform-section platform-redesign" id="platform" aria-labelledby="showcaseHeading">
+      <div class="showcase-shell">
+        <div class="showcase-heading">
           <div>
-            <p class="eyebrow">Interactive platform</p>
-            <h2>See the data layer in motion.</h2>
+            <p class="eyebrow">B.AI LAB / RESEARCH SOFTWARE</p>
+            <h2 id="showcaseHeading">Explore the <em>platform.</em></h2>
           </div>
-          <p class="section-intro">
-            One interface for multiple physiological systems. Shared time. Shared context. Machine-readable output for downstream analysis.
-          </p>
+          <p>One platform. Two research environments. Context-aware physiological monitoring.</p>
         </div>
 
-        <div class="platform-card">
-          <div class="platform-topbar">
-            <div>
-              <p class="platform-mode" id="platformMode">System Overview</p>
-              <h3 id="platformTitle">Multimodal physiological monitoring</h3>
+        <div class="showcase-console" id="showcaseConsole">
+          <div class="showcase-console-bar">
+            <div class="showcase-console-identity">
+              <span class="showcase-live-indicator" aria-hidden="true"></span>
+              <span id="showcaseCurrentTitle">System Overview</span>
+              <span class="showcase-console-separator" aria-hidden="true">/</span>
+              <span id="showcaseCurrentDomain">Clinical &amp; Ambulatory Assessment</span>
             </div>
-            <div class="platform-live"><span></span> simulated live stream</div>
+            <span class="showcase-demo-label">Synthetic data · Software demonstration</span>
           </div>
-
-          <div class="platform-stage" id="platformStage">
-            <video
-              id="platformVideo"
-              class="platform-video"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              aria-label="B.AI Lab software demonstration"
-            >
-              <source src="assets/video_data/bai_system_overview_loop.webm" type="video/webm" />
+          <div class="showcase-screen">
+            <video id="showcaseMainVideo" muted loop playsinline preload="metadata" poster="assets/images/video-posters/overview.jpg"
+              aria-label="Animated B.AI Lab system overview showing clinical and ambulatory modules">
+              <source src="assets/video_data/BAI_System_Overview_Loop.mp4" type="video/mp4" />
             </video>
+            <div class="showcase-screen-fallback" id="showcaseVideoFallback" hidden>
+              <strong>Preview unavailable</strong>
+              <span>The demonstration video could not be loaded.</span>
+            </div>
+          </div>
+          <div class="showcase-console-foot">
+            <p id="showcaseCurrentDescription" aria-live="polite" aria-atomic="true">Integrated monitoring across clinical environments and daily life.</p>
+            <button id="showcaseExpand" type="button" class="showcase-reset showcase-expand" aria-haspopup="dialog" aria-controls="showcaseViewer">View larger ↗</button>
+            <button id="showcaseMotion" type="button" class="showcase-reset" aria-pressed="false">Pause animations</button>
+            <button id="showcaseReset" type="button" class="showcase-reset" hidden>← Back to System Overview</button>
+          </div>
+        </div>
 
-            <!-- Interactive hotspots are positioned over the overview dashboard.
-                 Their geometry can be tuned in assets/css/site.css. -->
-            <div class="overview-hotspots" id="overviewHotspots">
-              <button class="platform-hotspot hotspot-hrv" data-platform-view="hrv" aria-label="Open cardiovascular and HRV view">
-                <span>Explore HRV</span>
+        <p class="showcase-mobile-hint">Tap an application to open a larger video with playback controls.</p>
+        <div class="showcase-domains" aria-label="Explore software applications">
+          <section class="showcase-domain showcase-domain--clinical" aria-labelledby="clinicalDomainTitle">
+            <div class="showcase-domain-heading">
+              <div>
+                <p class="showcase-domain-overline">01 / CLINICAL ENVIRONMENT</p>
+                <h3 id="clinicalDomainTitle">Clinical Monitoring</h3>
+                <p>High-resolution physiological assessment.</p>
+              </div>
+              <span class="showcase-domain-mark" aria-hidden="true">↗</span>
+            </div>
+            <div class="showcase-choices">
+              <button class="showcase-choice" type="button" data-showcase-view="hrv" aria-label="Play HRV Monitoring demonstration">
+                <span class="showcase-choice-media"><video class="showcase-preview-video" muted loop playsinline preload="none" aria-hidden="true"><source src="assets/video_data/bai_hrv_monitoring_loop.webm" type="video/webm"></video></span>
+                <span class="showcase-choice-copy"><span class="showcase-choice-index">01 / CARDIOVASCULAR</span><strong>HRV Monitoring</strong><span>Beat-to-beat dynamics and autonomic function</span></span>
+                <span class="showcase-choice-arrow" aria-hidden="true">↗</span>
               </button>
-              <button class="platform-hotspot hotspot-hemo" data-platform-view="hemo" aria-label="Open hemodynamics and perfusion view">
-                <span>Explore Hemodynamics</span>
+              <button class="showcase-choice" type="button" data-showcase-view="eeg" aria-label="Play EEG Monitoring demonstration">
+                <span class="showcase-choice-media"><video class="showcase-preview-video" muted loop playsinline preload="none" aria-hidden="true"><source src="assets/video_data/bai_eeg_monitoring_loop.webm" type="video/webm"></video></span>
+                <span class="showcase-choice-copy"><span class="showcase-choice-index">02 / NEURAL</span><strong>EEG Monitoring</strong><span>Cortical activity and neuroadaptive signals</span></span>
+                <span class="showcase-choice-arrow" aria-hidden="true">↗</span>
               </button>
-              <button class="platform-hotspot hotspot-eeg" data-platform-view="eeg" aria-label="Open central nervous system and EEG view">
-                <span>Explore EEG</span>
+              <button class="showcase-choice" type="button" data-showcase-view="hemo" aria-label="Play Hemodynamics demonstration">
+                <span class="showcase-choice-media"><video class="showcase-preview-video" muted loop playsinline preload="none" aria-hidden="true"><source src="assets/video_data/bai_hemodynamics_loop.webm" type="video/webm"></video></span>
+                <span class="showcase-choice-copy"><span class="showcase-choice-index">03 / CIRCULATION</span><strong>Hemodynamics</strong><span>Perfusion, circulation and vascular responses</span></span>
+                <span class="showcase-choice-arrow" aria-hidden="true">↗</span>
               </button>
             </div>
+          </section>
 
-            <button class="platform-back" id="platformBack" type="button" hidden>
-              ← System overview
+          <section class="showcase-domain showcase-domain--ambulatory" aria-labelledby="ambulatoryDomainTitle">
+            <div class="showcase-domain-heading">
+              <div>
+                <p class="showcase-domain-overline">02 / EVERYDAY ENVIRONMENT</p>
+                <h3 id="ambulatoryDomainTitle">Contextual Health Monitoring</h3>
+                <p>Home-based physiological assessment.</p>
+              </div>
+              <span class="showcase-domain-mark" aria-hidden="true">⌂</span>
+            </div>
+            <button class="showcase-ambulatory-card" type="button" data-showcase-view="contextual" aria-label="Play Contextual Health Monitoring demonstration">
+              <span class="showcase-ambulatory-media">
+                <video class="showcase-preview-video" muted loop playsinline preload="none" aria-hidden="true"><source src="assets/video_data/BAI_Contextual_Health_Monitoring_Loop.mp4" type="video/mp4"></video>
+              </span>
+              <span class="showcase-ambulatory-content">
+                <span class="showcase-ambulatory-copy"><strong>Everyday signals.<br>Meaningful context.</strong><small>Individual baselines · Real-world events · Physiological insights</small></span>
+                <span class="showcase-ambulatory-action" aria-hidden="true">Explore assessment ↗</span>
+              </span>
+              <span class="showcase-category-row"><span>Nutrition</span><span>Activity</span><span>Sleep</span></span>
             </button>
-
-            <div class="platform-corner-copy" id="platformCornerCopy">
-              Click a physiological system to inspect the stream.
-            </div>
-          </div>
-
-          <div class="platform-footer">
-            <div class="platform-tabs" role="tablist" aria-label="Physiological system videos">
-              <button class="platform-tab is-active" data-platform-view="overview" type="button">Overview</button>
-              <button class="platform-tab" data-platform-view="hrv" type="button">Cardiovascular · HRV</button>
-              <button class="platform-tab" data-platform-view="eeg" type="button">Central Nervous System · EEG</button>
-              <button class="platform-tab" data-platform-view="hemo" type="button">Hemodynamics &amp; Perfusion</button>
-            </div>
-
-            <p class="platform-description" id="platformDescription">
-              The overview connects cardiovascular, neural and hemodynamic monitoring within a single research workspace.
-            </p>
-          </div>
-        </div>
-
-        <div class="software-mantra-grid" aria-label="Software principles">
-          <article>
-            <span class="mantra-index">01</span>
-            <h3>Signals <strong>synchronized.</strong></h3>
-            <p>Continuous streams aligned across devices, sensors and physiological systems.</p>
-          </article>
-          <article>
-            <span class="mantra-index">02</span>
-            <h3>Events <strong>contextualized.</strong></h3>
-            <p>Medication, incision, meal, stressor or intervention linked to the physiology it occurred within.</p>
-          </article>
-          <article>
-            <span class="mantra-index">03</span>
-            <h3>Data <strong>AI-ready.</strong></h3>
-            <p>Context-aware, machine-readable data objects generated in real time as a first layer for AI analysis.</p>
-          </article>
+          </section>
         </div>
       </div>
     </section>
-
-
-    <!-- ============================================================
-         SECTION 03 — RESEARCH VISION
-         Brand concept meets scientific concept: physiological fingerprints.
-    ============================================================= -->
-    <section class="section vision-section" id="vision">
-      <div class="container">
-        <div class="vision-statement">
-          <p class="eyebrow">Research vision</p>
-          <h2>A physiological state is not a single signal.</h2>
-          <p>
-            We treat state as a contextual fingerprint: a pattern emerging from multiple physiological streams, synchronized in time and interpreted together with what happened around them.
-          </p>
-        </div>
-
-        <div class="vision-grid">
-          <article class="vision-card">
-            <span>01</span>
-            <h3>Measure</h3>
-            <p>Capture continuous ECG, PPG, EEG, EDA, HRV, hemodynamic and related physiological streams.</p>
-          </article>
-          <article class="vision-card">
-            <span>02</span>
-            <h3>Contextualize</h3>
-            <p>Place interventions, medication, behavior, environment and events onto the same temporal layer.</p>
-          </article>
-          <article class="vision-card">
-            <span>03</span>
-            <h3>Model</h3>
-            <p>Transform transparent, reproducible data objects into a foundation for physiological state modeling and AI.</p>
-          </article>
-        </div>
-
-        <div class="architecture-strip">
-          <span>Signals</span><i>→</i>
-          <span>Synchronization</span><i>→</i>
-          <span>Context</span><i>→</i>
-          <span>Data objects</span><i>→</i>
-          <span>State modeling</span><i>→</i>
-          <span>Inference</span>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ============================================================
-         SECTION 04 — CURRENT PROJECTS
-         Replace individual <article> blocks independently.
-    ============================================================= -->
-    <section class="section projects-section" id="projects">
-      <div class="container">
-        <div class="section-heading split-heading">
-          <div>
-            <p class="eyebrow">Current projects</p>
-            <h2>Research in motion.</h2>
-          </div>
-          <p class="section-intro">
-            Selected work connecting physiological measurement, computational infrastructure and real-world clinical or educational environments.
-          </p>
-        </div>
-
-        <div class="project-list">
-          <article class="project-row">
-            <div class="project-meta"><span>Infrastructure</span><em>Active</em></div>
-            <div>
-              <h3>AI-ready physiological data infrastructure</h3>
-              <p>Real-time acquisition, synchronization and event contextualization for continuous physiological streams and transparent downstream analysis.</p>
-            </div>
-            <span class="project-number">01</span>
-          </article>
-
-          <article class="project-row">
-            <div class="project-meta"><span>Clinical AI</span><em>Active</em></div>
-            <div>
-              <h3>Multimodal physiological monitoring</h3>
-              <p>Integrating ECG, PPG, EEG, EDA and hemodynamic information to investigate physiological state recognition in clinical environments.</p>
-            </div>
-            <span class="project-number">02</span>
-          </article>
-
-          <article class="project-row">
-            <div class="project-meta"><span>Medical Education</span><em>Active</em></div>
-            <div>
-              <h3>Stress physiology in learning and assessment</h3>
-              <p>Combining autonomic markers with educational context to understand stress, performance, simulation and learning.</p>
-            </div>
-            <span class="project-number">03</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
 
     <!-- ============================================================
          SECTION 05 — LEADERSHIP / PERSONAL WARMTH
@@ -405,11 +316,24 @@
           <a class="button button-primary" id="emailLink" href="#" hidden>Get in touch</a>
           <a class="button button-ghost" href="https://github.com/B-AI-Lab" target="_blank" rel="noreferrer">GitHub</a>
         </div>
-        <p class="contact-note" id="contactNote">Add the contact email once in <code>assets/js/site.js</code>.</p>
+        <p class="contact-note" id="contactNote" hidden></p>
       </div>
     </section>
 
   </main>
+
+  <dialog class="showcase-viewer" id="showcaseViewer" aria-labelledby="showcaseViewerTitle" aria-describedby="showcaseViewerHint">
+    <div class="showcase-viewer-bar">
+      <h2 id="showcaseViewerTitle">System Overview</h2>
+      <div class="showcase-viewer-actions">
+        <button id="showcaseFullscreen" type="button" class="showcase-reset">Fullscreen ↗</button>
+        <button id="showcaseViewerClose" type="button" class="showcase-reset" aria-label="Close video viewer" autofocus>Close ×</button>
+      </div>
+    </div>
+    <video id="showcaseViewerVideo" controls muted loop playsinline preload="none" aria-label="System Overview demonstration"></video>
+    <p id="showcaseViewerError" class="showcase-viewer-error" role="status" hidden>This video could not be loaded. Please close the viewer and try again.</p>
+    <p id="showcaseViewerHint">Use the video controls to play, pause or seek. Rotate your phone for a wider view.</p>
+  </dialog>
 
 
 <!-- ============================================================

@@ -27,7 +27,7 @@ const PLATFORM_VIEWS = {
     mode: "System Overview",
     title: "Multimodal physiological monitoring",
     description: "The overview connects cardiovascular, neural and hemodynamic monitoring within a single research workspace.",
-    video: "assets/video_data/bai_system_overview_loop.webm",
+    video: "assets/video_data/BAI_System_Overview_Loop.mp4",
     corner: "Click a physiological system to inspect the stream."
   },
   hrv: {

@@ -198,7 +198,13 @@
     "featured": true,
     "volume": "37",
     "article": "100242",
-    "journal_visual": null,
+    "journal_visual": {
+      "src": "assets/images/journals/trends-neuroscience-education-custom.webp",
+      "alt": "Original in-house identification graphic for Trends in Neuroscience and Education; Elsevier; ISSN 2211-9493",
+      "kind": "cover",
+      "preview_only": false,
+      "rights_status": "ORIGINAL_IN_HOUSE_DESIGN"
+    },
     "metadata_source": "https://pubmed.ncbi.nlm.nih.gov/39638492/"
   },
   {

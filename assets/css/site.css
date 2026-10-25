@@ -1001,6 +1001,7 @@ video {
   font-size: .76rem;
   line-height: 1.65;
 }
+.publication-authors { font-size: .84rem; }
 .publication-authors strong { color: var(--ink-soft); font-weight: 600; }
 .publication-meta { margin-top: 13px; }
 .publication-date { margin-top: 3px; }
@@ -1025,11 +1026,13 @@ video {
   border-radius: var(--radius-lg);
   background: linear-gradient(125deg, var(--paper-warm), #f5f2fc);
 }
+.topic-journal-identity { min-width: 0; text-align: center; }
 .topic-visual { min-height: 0; background: transparent; }
 .topic-visual img { max-height: 110px; object-position: center; mix-blend-mode: multiply; }
 .topic-role { color: var(--violet-deep); font-size: .94rem; line-height: 1.35; font-weight: 600; }
 .research-topic-copy h3 { margin-top: 12px; font-size: clamp(1.25rem, 2.3vw, 1.8rem); font-weight: 500; letter-spacing: -.03em; line-height: 1.35; }
-.topic-journal { margin-top: 13px; color: var(--muted); font-size: .76rem; }
+.topic-journal { margin-top: 12px; color: var(--ink-soft); font-size: .84rem; font-weight: 500; line-height: 1.4; }
+.journal-publisher { margin-top: 4px; color: var(--muted); font-size: .73rem; font-weight: 400; line-height: 1.45; }
 .topic-link { display: inline-block; margin-top: 22px; color: var(--violet-deep); font-size: .75rem; }
 .research-topic-card:hover .topic-link { text-decoration: underline; text-underline-offset: 4px; }
 .editorial-affiliations, .peer-review-group { margin-top: 38px; }
@@ -1040,10 +1043,11 @@ video {
 .editorial-journal-visual img { max-height: 64px; object-position: center; }
 .editorial-journal-copy { min-width: 0; }
 .editorial-card h4 { font-size: 1.06rem; line-height: 1.4; font-weight: 500; }
-.editorial-card p { margin-top: 7px; color: var(--ink-soft); font-size: .8rem; line-height: 1.6; font-weight: 500; }
+.editorial-card .editorial-role { margin-top: 7px; color: var(--ink-soft); font-size: .8rem; line-height: 1.6; font-weight: 500; }
 .editorial-card > span { position: absolute; right: 22px; top: 24px; color: var(--violet-deep); }
 .journal-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
-.review-journal-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 146px; padding: 18px 22px; border: 2px solid var(--academic-border); border-radius: var(--radius-md); background: var(--paper); }
+.review-journal-card { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 146px; padding: 28px 22px 18px; border: 2px solid var(--academic-border); border-radius: var(--radius-md); background: var(--paper); }
+.review-journal-copy { min-width: 0; max-width: 100%; text-align: center; }
 .review-journal-card h4 { font-size: .9rem; font-weight: 500; line-height: 1.4; letter-spacing: -.015em; text-align: center; overflow-wrap: anywhere; }
 .journal-arrow { position: absolute; top: 14px; right: 14px; color: var(--muted); font-size: .8rem; line-height: 1; }
 .review-journal-visual { justify-content: center; width: 100%; min-height: 0; margin-bottom: 0; padding: 0; }
@@ -1362,6 +1366,7 @@ video {
   .publication-visual[data-journal-kind="cover"] img { max-height: 150px; }
   .publication-title { font-size: .98rem; margin-top: 8px; }
   .publication-authors, .publication-meta, .publication-date { font-size: .69rem; }
+  .publication-authors { font-size: .76rem; }
   .publication-doi { font-size: .66rem; }
   .research-topic-card { grid-template-columns: 1fr; gap: 22px; }
   .topic-visual { min-height: 0; padding: 0; justify-content: center; }
@@ -1371,8 +1376,8 @@ video {
   .journal-grid { gap: 10px; }
   .editorial-card.has-journal-visual { grid-template-columns: clamp(94px, 30vw, 124px) minmax(0, 1fr); gap: 15px; padding-left: 18px; padding-right: 44px; }
   .editorial-card h4 { font-size: 1rem; }
-  .editorial-card p { font-size: .76rem; }
-  .review-journal-card { min-height: 150px; gap: 10px; padding: 15px; }
+  .editorial-card .editorial-role { font-size: .76rem; }
+  .review-journal-card { min-height: 150px; gap: 10px; padding: 26px 15px 15px; }
   .review-journal-visual img { max-height: 48px; }
   .review-journal-card.has-journal-cover .review-journal-visual img { max-height: 70px; }
   .review-journal-card h4 { font-size: .82rem; }

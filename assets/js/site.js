@@ -266,6 +266,16 @@ function renderPublications(publications) {
    ACADEMIC SERVICE
 ================================================================ */
 
+function journalPublisher(item) {
+  return item.publisher_display || item.publisher || "";
+}
+
+function publisherMarkup(item) {
+  const publisher = journalPublisher(item);
+  if (!publisher || publisher.toLowerCase() === item.journal?.toLowerCase()) return "";
+  return `<p class="journal-publisher">${escapeHtml(publisher)}</p>`;
+}
+
 function renderEditorial(data) {
   const topicContainer = $("#researchTopic");
   const container = $("#editorialRoles");
@@ -273,11 +283,14 @@ function renderEditorial(data) {
   if (topicContainer && topic) {
     topicContainer.innerHTML = `
       <a class="research-topic-card" href="${escapeHtml(externalUrl(topic.url))}" target="_blank" rel="noopener noreferrer">
-        <div class="topic-visual journal-visual">${journalVisual(topic)}</div>
+        <div class="topic-journal-identity">
+          <div class="topic-visual journal-visual">${journalVisual(topic)}</div>
+          <p class="topic-journal">${escapeHtml(topic.journal)}</p>
+          ${publisherMarkup(topic)}
+        </div>
         <div class="research-topic-copy">
           <p class="topic-role">${escapeHtml(topic.role)}</p>
           <h3>${escapeHtml(topic.title)}</h3>
-          <p class="topic-journal">${escapeHtml(topic.journal)}</p>
           <span class="topic-link">Explore the Research Topic <span aria-hidden="true">↗</span></span>
         </div>
       </a>`;
@@ -292,7 +305,8 @@ function renderEditorial(data) {
       ${serviceVisual(item, "editorial-journal-visual")}
       <div class="editorial-journal-copy">
         <h4>${escapeHtml(item.journal)}</h4>
-        <p>${escapeHtml(item.role)}${item.section ? ` · ${escapeHtml(item.section)}` : ""}</p>
+        ${publisherMarkup(item)}
+        <p class="editorial-role">${escapeHtml(item.role)}${item.section ? ` · ${escapeHtml(item.section)}` : ""}</p>
       </div>
       <span aria-hidden="true">↗</span>
     </a>`).join("");
@@ -304,9 +318,12 @@ function renderPeerReview(data) {
   const doctoralContainer = $("#doctoralReview");
   if (journalsContainer) {
     journalsContainer.innerHTML = (data?.journal_reviewing || []).map(item => `
-      <a class="review-journal-card${serviceVisualClasses(item)}" href="${escapeHtml(externalUrl(item.url))}" target="_blank" rel="noopener noreferrer" aria-label="Morris Gellisch — Peer Reviewer for ${escapeHtml(item.journal)}">
+      <a class="review-journal-card${serviceVisualClasses(item)}" href="${escapeHtml(externalUrl(item.url))}" target="_blank" rel="noopener noreferrer" aria-label="Morris Gellisch — Peer Reviewer for ${escapeHtml(item.journal)}${journalPublisher(item) ? `, published by ${escapeHtml(journalPublisher(item))}` : ""}">
         ${serviceVisual(item, "review-journal-visual")}
-        <h4>${escapeHtml(item.journal)}</h4>
+        <div class="review-journal-copy">
+          <h4>${escapeHtml(item.journal)}</h4>
+          ${publisherMarkup(item)}
+        </div>
         <span class="journal-arrow" aria-hidden="true">↗</span>
       </a>`).join("");
     attachJournalImageFallbacks(journalsContainer);

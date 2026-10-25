@@ -51,6 +51,7 @@
   "display_note": "Impact factors are retained from the CV for reference but should not be shown prominently on the website by default.",
   "research_topic_leadership": {
     "id": "frontiers-physiology-ai-77661",
+    "publisher": "Frontiers",
     "journal": "Frontiers in Digital Health",
     "role": "Topic Editor",
     "title": "AI-Driven Interpretation of Human Physiology in Health, Medicine, and Education",

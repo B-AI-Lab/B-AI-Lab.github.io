@@ -304,10 +304,9 @@ function renderPeerReview(data) {
   const doctoralContainer = $("#doctoralReview");
   if (journalsContainer) {
     journalsContainer.innerHTML = (data?.journal_reviewing || []).map(item => `
-      <a class="review-journal-card${serviceVisualClasses(item)}" href="${escapeHtml(externalUrl(item.url))}" target="_blank" rel="noopener noreferrer">
+      <a class="review-journal-card${serviceVisualClasses(item)}" href="${escapeHtml(externalUrl(item.url))}" target="_blank" rel="noopener noreferrer" aria-label="Morris Gellisch — Peer Reviewer for ${escapeHtml(item.journal)}">
         ${serviceVisual(item, "review-journal-visual")}
         <h4>${escapeHtml(item.journal)}</h4>
-        <span class="review-role">Peer Reviewer</span>
         <span class="journal-arrow" aria-hidden="true">↗</span>
       </a>`).join("");
     attachJournalImageFallbacks(journalsContainer);

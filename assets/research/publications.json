@@ -4,7 +4,7 @@
     "year": 2025,
     "type": "journal_article",
     "status": "published",
-    "title": "Establishing a Real-Time Biomarker-to-LLM Interface: A Modular Pipeline for HRV Signal Acquisition, Processing, and Physiological State Interpretation via Generative AI",
+    "title": "Establishing a real-time biomarker-to-LLM interface: a modular pipeline for HRV signal acquisition, processing, and physiological state interpretation via generative AI.",
     "authors": [
       "Gellisch, M.",
       "Burr, B."
@@ -19,7 +19,10 @@
       "Digital Health",
       "HRV"
     ],
-    "featured": true
+    "featured": true,
+    "publication_date": "2025-09-26",
+    "journal_visual": null,
+    "metadata_source": "https://www.frontiersin.org/journals/digital-health/articles/10.3389/fdgth.2025.1670464/full"
   },
   {
     "id": "gellisch-et-al-2022-learning-environments",
@@ -177,7 +180,7 @@
     "year": 2024,
     "type": "journal_article",
     "status": "published",
-    "title": "Neurobiological Stress Markers in Educational Research: A Systematic Review of Physiological Insights in Health Science Education",
+    "title": "Neurobiological stress markers in educational research: A systematic review of physiological insights in health science education.",
     "authors": [
       "Gellisch, M.",
       "Bablok, M.",
@@ -192,7 +195,11 @@
       "Systematic Review",
       "Physiology"
     ],
-    "featured": true
+    "featured": true,
+    "volume": "37",
+    "article": "100242",
+    "journal_visual": null,
+    "metadata_source": "https://pubmed.ncbi.nlm.nih.gov/39638492/"
   },
   {
     "id": "gellisch-et-al-2023-mental-stress-pandemic",
@@ -560,5 +567,27 @@
     ],
     "featured": false,
     "url": "https://www.beltz.de/fachmedien/soziologie/produkte/details/52005-gaming-in-zeiten-der-krise.html"
+  },
+  {
+    "id": "gellisch-schaefer-2026-peer-led-examination",
+    "year": 2026,
+    "type": "journal_article",
+    "status": "published",
+    "title": "Peer-led examination simulation reshapes psychophysiological and emotional state profiles during problem-based medical learning.",
+    "authors": [
+      "Gellisch, M.",
+      "Schäfer, T."
+    ],
+    "journal": "npj Science of Learning",
+    "doi": "10.1038/s41539-026-00459-x",
+    "publication_date": "2026-10-24",
+    "publication_stage": "early_access",
+    "authorship_role": "first_author",
+    "metadata_source": "https://www.nature.com/articles/s41539-026-00459-x",
+    "journal_visual": null,
+    "categories": [
+      "Stress & Medical Education",
+      "Psychophysiology"
+    ]
   }
 ]

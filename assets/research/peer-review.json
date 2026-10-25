@@ -1,26 +1,125 @@
 {
   "journal_reviewing": [
-    {"journal": "Digital Health", "publisher": "Sage Journals", "impact_factor_as_listed_in_cv": "3.30 (2026)"},
-    {"journal": "Higher Education", "publisher": "Springer Nature", "impact_factor_as_listed_in_cv": "4.60 (2024)"},
-    {"journal": "Annals of Medicine", "publisher": "Taylor & Francis Online", "impact_factor_as_listed_in_cv": "4.30 (2024)"},
-    {"journal": "Medical Education", "publisher": "Wiley and The Association for the Study of Medical Education", "impact_factor_as_listed_in_cv": "6.20 (2025)"},
-    {"journal": "Scientific Reports", "publisher": "Nature Portfolio", "impact_factor_as_listed_in_cv": "4.90 (2022)"},
-    {"journal": "Medical Education Online", "publisher": "Taylor & Francis Online", "impact_factor_as_listed_in_cv": "6.00 (2021)"},
-    {"journal": "Anatomical Sciences Education", "publisher": "Wiley – American Association for Anatomy", "impact_factor_as_listed_in_cv": "7.30 (2022)"},
-    {"journal": "BMC Medical Education", "publisher": "Springer Nature", "impact_factor_as_listed_in_cv": "2.70 (2024)"},
-    {"journal": "Mind, Brain, and Education", "publisher": "Wiley Online Library", "impact_factor_as_listed_in_cv": "2.20 (2025)"},
-    {"journal": "Brain and Behavior", "publisher": "Wiley Online Library", "impact_factor_as_listed_in_cv": "2.60 (2023)"},
-    {"journal": "Health Science Reports", "publisher": "Wiley Online Library", "impact_factor_as_listed_in_cv": "2.10 (2023)"},
-    {"journal": "PeerJ - Life and Environment", "publisher": "PeerJ Publishing", "impact_factor_as_listed_in_cv": "3.06 (2021)"},
-    {"journal": "PLOS ONE", "publisher": "PLOS nonprofit corporation", "impact_factor_as_listed_in_cv": "2.90 (2023)"},
-    {"journal": "Heliyon", "publisher": "Elsevier / ScienceDirect", "impact_factor_as_listed_in_cv": "3.60 (2025)"},
-    {"journal": "Cognitive Processing", "publisher": "Springer Nature", "impact_factor_as_listed_in_cv": "1.4 (2024)"},
-    {"journal": "Technology and Health Care", "publisher": "Sage Journals", "impact_factor_as_listed_in_cv": "1.3 (2026)"}
+    {
+      "journal": "Digital Health",
+      "publisher": "Sage Journals",
+      "impact_factor_as_listed_in_cv": "3.30 (2026)",
+      "url": "https://journals.sagepub.com/home/dhj",
+      "journal_visual": null
+    },
+    {
+      "journal": "Higher Education",
+      "publisher": "Springer Nature",
+      "impact_factor_as_listed_in_cv": "4.60 (2024)",
+      "url": "https://link.springer.com/journal/10734",
+      "journal_visual": null
+    },
+    {
+      "journal": "Annals of Medicine",
+      "publisher": "Taylor & Francis Online",
+      "impact_factor_as_listed_in_cv": "4.30 (2024)",
+      "url": "https://www.tandfonline.com/journals/iann20",
+      "journal_visual": null
+    },
+    {
+      "journal": "Medical Education",
+      "publisher": "Wiley and The Association for the Study of Medical Education",
+      "impact_factor_as_listed_in_cv": "6.20 (2025)",
+      "url": "https://asmepublications.onlinelibrary.wiley.com/journal/13652923",
+      "journal_visual": null
+    },
+    {
+      "journal": "Scientific Reports",
+      "publisher": "Nature Portfolio",
+      "impact_factor_as_listed_in_cv": "4.90 (2022)",
+      "url": "https://www.nature.com/srep/",
+      "journal_visual": null
+    },
+    {
+      "journal": "Medical Education Online",
+      "publisher": "Taylor & Francis Online",
+      "impact_factor_as_listed_in_cv": "6.00 (2021)",
+      "url": "https://www.tandfonline.com/journals/zmeo",
+      "journal_visual": null
+    },
+    {
+      "journal": "Anatomical Sciences Education",
+      "publisher": "Wiley – American Association for Anatomy",
+      "impact_factor_as_listed_in_cv": "7.30 (2022)",
+      "url": "https://anatomypubs.onlinelibrary.wiley.com/journal/19359780",
+      "journal_visual": null
+    },
+    {
+      "journal": "BMC Medical Education",
+      "publisher": "Springer Nature",
+      "impact_factor_as_listed_in_cv": "2.70 (2024)",
+      "url": "https://link.springer.com/journal/12909",
+      "journal_visual": null
+    },
+    {
+      "journal": "Mind, Brain, and Education",
+      "publisher": "Wiley Online Library",
+      "impact_factor_as_listed_in_cv": "2.20 (2025)",
+      "url": "https://onlinelibrary.wiley.com/journal/1751228x",
+      "journal_visual": null
+    },
+    {
+      "journal": "Brain and Behavior",
+      "publisher": "Wiley Online Library",
+      "impact_factor_as_listed_in_cv": "2.60 (2023)",
+      "url": "https://onlinelibrary.wiley.com/journal/21623279",
+      "journal_visual": null
+    },
+    {
+      "journal": "Health Science Reports",
+      "publisher": "Wiley Online Library",
+      "impact_factor_as_listed_in_cv": "2.10 (2023)",
+      "url": "https://onlinelibrary.wiley.com/journal/23988835",
+      "journal_visual": null
+    },
+    {
+      "journal": "PeerJ - Life and Environment",
+      "publisher": "PeerJ Publishing",
+      "impact_factor_as_listed_in_cv": "3.06 (2021)",
+      "url": "https://peerj.com/journals/peerj/",
+      "journal_visual": null
+    },
+    {
+      "journal": "PLOS ONE",
+      "publisher": "PLOS nonprofit corporation",
+      "impact_factor_as_listed_in_cv": "2.90 (2023)",
+      "url": "https://journals.plos.org/plosone/",
+      "journal_visual": null
+    },
+    {
+      "journal": "Heliyon",
+      "publisher": "Elsevier / ScienceDirect",
+      "impact_factor_as_listed_in_cv": "3.60 (2025)",
+      "url": "https://www.cell.com/heliyon/home",
+      "journal_visual": null
+    },
+    {
+      "journal": "Cognitive Processing",
+      "publisher": "Springer Nature",
+      "impact_factor_as_listed_in_cv": "1.4 (2024)",
+      "url": "https://link.springer.com/journal/10339",
+      "journal_visual": null
+    },
+    {
+      "journal": "Technology and Health Care",
+      "publisher": "Sage Journals",
+      "impact_factor_as_listed_in_cv": "1.3 (2026)",
+      "url": "https://journals.sagepub.com/home/thc",
+      "journal_visual": null
+    }
   ],
   "doctoral_reviewing": [
     {
       "role": "External reviewer for international doctoral procedures",
-      "institutions": ["Stellenbosch University, South Africa", "Coventry University, UK"],
+      "institutions": [
+        "Stellenbosch University, South Africa",
+        "Coventry University, UK"
+      ],
       "description": "Ongoing activity as an external reviewer in structured doctoral programs with a focus on educational research in an international context."
     }
   ]

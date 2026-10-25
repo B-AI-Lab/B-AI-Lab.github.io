@@ -71,26 +71,65 @@ function escapeHtml(value = "") {
 }
 
 function formatAuthors(authors = []) {
-  return authors
-    .map(author => {
-      const safe = escapeHtml(author);
-      return /Gellisch/i.test(author) ? `<strong>${safe}</strong>` : safe;
-    })
-    .join(", ");
+  const names = authors.map(author => {
+    const safe = escapeHtml(author);
+    return /^Gellisch, M\.$/.test(author) ? `<strong>${safe}</strong>` : safe;
+  });
+  if (names.length < 2) return names.join("");
+  return `${names.slice(0, -1).join(", ")}, &amp; ${names.at(-1)}`;
 }
 
-function roleLabel(role = "") {
-  const map = {
-    first_author: "First author",
-    shared_first_author: "Shared first author",
-    shared_senior_author: "Shared senior author",
-    senior_author: "Senior author",
-    sole_author: "Sole author",
-    co_author: "Co-author"
-  };
-  return map[role] || role.replaceAll("_", " ");
+function externalUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && !url.username && !url.password ? url.href : "";
+  } catch {
+    return "";
+  }
 }
 
+// Unreleased journal artwork is restricted to loopback design previews.
+const IS_LOCAL_DESIGN_PREVIEW = ["localhost", "127.0.0.1", "[::1]", "::1"].includes(window.location.hostname);
+
+function availableJournalVisual(item) {
+  const visual = item.journal_visual;
+  const valid = visual && /^assets\/images\/journals\/[a-z0-9-]+\.(webp|png|jpg|svg)$/.test(visual.src);
+  return valid && (!visual.preview_only || IS_LOCAL_DESIGN_PREVIEW) ? visual : null;
+}
+
+function journalVisual(item, { fallbackName = true } = {}) {
+  const visual = availableJournalVisual(item);
+  const fallback = fallbackName ? `<span class="journal-name-fallback"${visual ? " hidden" : ""}>${escapeHtml(item.journal)}</span>` : "";
+  if (visual) return `<img data-journal-image src="${escapeHtml(visual.src)}" alt="${escapeHtml(visual.alt || `${item.journal} journal branding`)}" loading="lazy" decoding="async" />${fallback}`;
+  return fallback;
+}
+
+function serviceVisual(item, className) {
+  if (!availableJournalVisual(item)) return "";
+  return `<div class="journal-visual ${className}" data-service-visual>${journalVisual(item, { fallbackName: false })}</div>`;
+}
+
+function serviceVisualClasses(item) {
+  const visual = availableJournalVisual(item);
+  return visual ? ` has-journal-visual${visual.kind === "cover" ? " has-journal-cover" : ""}` : "";
+}
+
+function attachJournalImageFallbacks(container) {
+  container.querySelectorAll("img[data-journal-image]").forEach(img => {
+    const showFallback = () => {
+      img.hidden = true;
+      const fallback = img.nextElementSibling;
+      if (fallback?.classList.contains("journal-name-fallback")) fallback.hidden = false;
+      const serviceWrapper = img.closest("[data-service-visual]");
+      if (serviceWrapper) {
+        serviceWrapper.hidden = true;
+        serviceWrapper.closest(".editorial-card, .review-journal-card")?.classList.remove("has-journal-visual", "has-journal-cover");
+      }
+    };
+    img.addEventListener("error", showFallback, { once: true });
+    if (img.complete && img.naturalWidth === 0) showFallback();
+  });
+}
 
 /* ================================================================
    NAVIGATION
@@ -182,65 +221,45 @@ document.addEventListener("pointerdown", () => {
    PUBLICATIONS
 ================================================================ */
 
-let publicationData = [];
-let showingAllPublications = false;
-
-function sortPublications(data) {
-  return [...data].sort((a, b) => {
-    if ((b.year || 0) !== (a.year || 0)) return (b.year || 0) - (a.year || 0);
-    return Number(Boolean(b.featured)) - Number(Boolean(a.featured));
-  });
-}
+const SELECTED_PUBLICATION_IDS = Object.freeze([
+  "gellisch-schaefer-2026-peer-led-examination",
+  "gellisch-et-al-2024-neurobiological-stress-markers-review",
+  "gellisch-burr-2025-hrv-llm"
+]);
 
 function publicationMarkup(pub) {
-  const venue = pub.journal || pub.book_title || "Work in review";
-  const detail = [venue, pub.volume ? `Vol. ${pub.volume}` : "", pub.article || pub.pages || ""]
-    .filter(Boolean)
-    .join(" · ");
-
-  const link = pub.doi
-    ? `https://doi.org/${encodeURIComponent(pub.doi)}`
-    : pub.url || "";
+  const link = externalUrl(`https://doi.org/${pub.doi}`);
+  const detail = [pub.journal, pub.volume, pub.article || pub.pages].filter(Boolean).join(", ");
+  const published = pub.publication_date && /^\d{4}-\d{2}-\d{2}$/.test(pub.publication_date)
+    ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${pub.publication_date}T00:00:00Z`))
+    : "";
 
   return `
-    <article class="publication-item">
-      <div class="publication-year">${escapeHtml(pub.year || "")}</div>
-      <div>
-        <h3 class="publication-title">${escapeHtml(pub.title || "")}</h3>
-        <p class="publication-authors">${formatAuthors(pub.authors || [])}</p>
-        <p class="publication-meta">
-          <span>${escapeHtml(detail)}</span>
-          ${pub.authorship_role ? `<span class="publication-role">${escapeHtml(roleLabel(pub.authorship_role))}</span>` : ""}
-          ${pub.status && pub.status !== "published" ? `<span>${escapeHtml(pub.status.replaceAll("_", " "))}</span>` : ""}
-        </p>
+    <article class="publication-item" data-publication-id="${escapeHtml(pub.id)}">
+      <a class="publication-visual journal-visual" data-journal-kind="${pub.journal_visual?.kind === "cover" ? "cover" : "logo"}" href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer" aria-label="Read ${escapeHtml(pub.title)} — ${escapeHtml(pub.journal)} (opens in new tab)">
+        ${journalVisual(pub)}
+      </a>
+      <div class="publication-citation">
+        <p class="publication-authors">${formatAuthors(pub.authors)} (${escapeHtml(pub.year)}).</p>
+        <h3 class="publication-title"><a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(pub.title)}</a></h3>
+        <p class="publication-meta">${escapeHtml(detail)}.</p>
+        ${published ? `<p class="publication-date">Published <time datetime="${escapeHtml(pub.publication_date)}">${escapeHtml(published)}</time></p>` : ""}
+        <a class="publication-doi" href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">DOI: ${escapeHtml(pub.doi)} <span aria-hidden="true">↗</span></a>
       </div>
-      ${link ? `<a class="publication-link" href="${escapeHtml(link)}" target="_blank" rel="noreferrer">View ↗</a>` : ""}
-    </article>
-  `;
+    </article>`;
 }
 
-function renderPublications() {
+function renderPublications(publications) {
   const container = $("#publicationList");
-  const toggle = $("#togglePublications");
   if (!container) return;
-
-  const sorted = sortPublications(publicationData);
-  const featured = sorted.filter(pub => pub.featured);
-  const initial = featured.length ? featured.slice(0, 6) : sorted.slice(0, 6);
-  const visible = showingAllPublications ? sorted : initial;
-
-  container.innerHTML = visible.map(publicationMarkup).join("");
-
-  if (toggle && sorted.length > initial.length) {
-    toggle.hidden = false;
-    toggle.textContent = showingAllPublications ? "Show selected publications" : `Show all publications (${sorted.length})`;
-  }
+  const byId = new Map(publications.map(pub => [pub.id, pub]));
+  const selected = SELECTED_PUBLICATION_IDS.map(id => {
+    if (!byId.has(id)) throw new Error(`Selected publication is missing: ${id}`);
+    return byId.get(id);
+  });
+  container.innerHTML = selected.map(publicationMarkup).join("");
+  attachJournalImageFallbacks(container);
 }
-
-$("#togglePublications")?.addEventListener("click", () => {
-  showingAllPublications = !showingAllPublications;
-  renderPublications();
-});
 
 
 /* ================================================================
@@ -248,43 +267,64 @@ $("#togglePublications")?.addEventListener("click", () => {
 ================================================================ */
 
 function renderEditorial(data) {
+  const topicContainer = $("#researchTopic");
   const container = $("#editorialRoles");
+  const topic = data?.research_topic_leadership;
+  if (topicContainer && topic) {
+    topicContainer.innerHTML = `
+      <a class="research-topic-card" href="${escapeHtml(externalUrl(topic.url))}" target="_blank" rel="noopener noreferrer">
+        <div class="topic-visual journal-visual">${journalVisual(topic)}</div>
+        <div class="research-topic-copy">
+          <p class="topic-role">${escapeHtml(topic.role)}</p>
+          <h3>${escapeHtml(topic.title)}</h3>
+          <p class="topic-journal">${escapeHtml(topic.journal)}</p>
+          <span class="topic-link">Explore the Research Topic <span aria-hidden="true">↗</span></span>
+        </div>
+      </a>`;
+    attachJournalImageFallbacks(topicContainer);
+  }
   if (!container) return;
-
-  const roles = data?.editorial_roles || [];
+  // The verified Topic Editor appointment is represented once, above.
+  // A separate Digital Health role can be restored after independent verification.
+  const roles = (data?.editorial_roles || []).filter(item => !(item.display_as_topic_leadership && topic && item.research_topic_id === topic.id));
   container.innerHTML = roles.map(item => `
-    <article class="editorial-card">
-      <h3>${escapeHtml(item.journal)}</h3>
-      <p>${escapeHtml(item.role)} · ${escapeHtml(item.publisher || "")}${item.section ? ` · ${escapeHtml(item.section)}` : ""}</p>
-      ${item.research_topic ? `<p class="topic">${escapeHtml(item.research_topic)}</p>` : ""}
-    </article>
-  `).join("");
+    <a class="editorial-card${serviceVisualClasses(item)}" href="${escapeHtml(externalUrl(item.url))}" target="_blank" rel="noopener noreferrer">
+      ${serviceVisual(item, "editorial-journal-visual")}
+      <div class="editorial-journal-copy">
+        <h4>${escapeHtml(item.journal)}</h4>
+        <p>${escapeHtml(item.role)}${item.section ? ` · ${escapeHtml(item.section)}` : ""}</p>
+      </div>
+      <span aria-hidden="true">↗</span>
+    </a>`).join("");
+  attachJournalImageFallbacks(container);
 }
 
 function renderPeerReview(data) {
   const journalsContainer = $("#reviewJournals");
   const doctoralContainer = $("#doctoralReview");
-  if (!journalsContainer) return;
-
-  const journals = data?.journal_reviewing || [];
-  journalsContainer.innerHTML = journals.map(item => `
-    <span class="journal-pill" title="${escapeHtml(item.publisher || "")}">${escapeHtml(item.journal)}</span>
-  `).join("");
-
-  const doctoral = data?.doctoral_reviewing?.[0];
-  if (doctoral && doctoralContainer) {
-    doctoralContainer.innerHTML = `
+  if (journalsContainer) {
+    journalsContainer.innerHTML = (data?.journal_reviewing || []).map(item => `
+      <a class="review-journal-card${serviceVisualClasses(item)}" href="${escapeHtml(externalUrl(item.url))}" target="_blank" rel="noopener noreferrer">
+        ${serviceVisual(item, "review-journal-visual")}
+        <h4>${escapeHtml(item.journal)}</h4>
+        <span class="review-role">Peer Reviewer</span>
+        <span class="journal-arrow" aria-hidden="true">↗</span>
+      </a>`).join("");
+    attachJournalImageFallbacks(journalsContainer);
+  }
+  if (doctoralContainer) {
+    doctoralContainer.innerHTML = (data?.doctoral_reviewing || []).map(item => `
       <article class="doctoral-card">
-        <strong>${escapeHtml(doctoral.role)}</strong>
-        <p>${escapeHtml((doctoral.institutions || []).join(" · "))}</p>
-      </article>
-    `;
+        <h3>${escapeHtml(item.role)}</h3>
+        <p class="doctoral-institutions">${escapeHtml((item.institutions || []).join(" · "))}</p>
+        ${item.description ? `<p>${escapeHtml(item.description)}</p>` : ""}
+      </article>`).join("");
   }
 }
 
 
 /* ================================================================
-   RESEARCH METRICS / JSON LOADING
+   RESEARCH JSON LOADING
 ================================================================ */
 
 async function loadResearchData() {
@@ -305,23 +345,17 @@ async function loadResearchData() {
       peerResponse.json()
     ]);
 
-    publicationData = publications;
-    renderPublications();
+    renderPublications(publications);
     renderEditorial(editorial);
     renderPeerReview(peer);
-
-    const publishedCount = publications.filter(pub => pub.status === "published").length;
-    const editorialCount = editorial?.editorial_roles?.length || 0;
-    const reviewCount = peer?.journal_reviewing?.length || 0;
-
-    $("#metricPublications").textContent = publishedCount;
-    $("#metricEditorial").textContent = editorialCount;
-    $("#metricReviewing").textContent = reviewCount;
   } catch (error) {
     console.error(error);
 
     const publicationList = $("#publicationList");
     if (publicationList) publicationList.innerHTML = `<p class="data-error">Publication data could not be loaded.</p>`;
+
+    const researchTopic = $("#researchTopic");
+    if (researchTopic) researchTopic.innerHTML = "";
 
     const editorialRoles = $("#editorialRoles");
     if (editorialRoles) editorialRoles.innerHTML = `<p class="data-error">Editorial data could not be loaded.</p>`;

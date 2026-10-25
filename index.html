@@ -226,11 +226,6 @@
             <img src="assets/brand/Ruhr-Universitaet-Bochum_Logo_Blau_screen_rgb.svg" alt="Ruhr University Bochum" />
           </div>
 
-          <div class="profile-metrics" aria-label="Research profile metrics">
-            <div><strong id="metricPublications">—</strong><span>published works</span></div>
-            <div><strong id="metricEditorial">—</strong><span>editorial roles</span></div>
-            <div><strong id="metricReviewing">—</strong><span>reviewing journals</span></div>
-          </div>
         </div>
       </div>
     </section>
@@ -246,7 +241,7 @@
         <div class="section-heading split-heading">
           <div>
             <p class="eyebrow">Research record</p>
-            <h2>Selected publications.</h2>
+            <h2>Selected Publications</h2>
           </div>
           <p class="section-intro">
             Work spanning physiological computing, digital health, stress physiology, medical education and developmental biology.
@@ -258,7 +253,7 @@
         </div>
 
         <div class="publication-actions">
-          <button class="button button-ghost" id="togglePublications" type="button" hidden>Show all publications</button>
+          <a class="button button-ghost" href="https://www.researchgate.net/profile/Morris_Gellisch" target="_blank" rel="noopener noreferrer">View all publications on ResearchGate ↗</a>
         </div>
       </div>
     </section>
@@ -273,24 +268,27 @@
         <div class="section-heading split-heading">
           <div>
             <p class="eyebrow">Academic service</p>
-            <h2>Editorial &amp; peer-review work.</h2>
+            <h2>Editorial &amp; Peer Review</h2>
           </div>
           <p class="section-intro">
             Editorial responsibilities, journal reviewing and international doctoral assessment across digital health, medicine, neuroscience and education.
           </p>
         </div>
 
-        <div class="service-grid">
-          <div class="service-column">
-            <p class="service-label">Editorial roles</p>
-            <div id="editorialRoles" class="service-stack"><p class="data-loading">Loading editorial roles…</p></div>
-          </div>
-          <div class="service-column">
-            <p class="service-label">Peer review</p>
-            <div id="reviewJournals" class="journal-cloud"><p class="data-loading">Loading reviewing activity…</p></div>
-            <div id="doctoralReview" class="doctoral-review"></div>
-          </div>
+        <div id="researchTopic" class="research-topic"><p class="data-loading">Loading Research Topic…</p></div>
+
+        <div class="editorial-affiliations" aria-labelledby="editorialHeading">
+          <h3 class="service-label" id="editorialHeading">Editorial Roles</h3>
+          <p class="service-subtitle">Journals in which I serve as Editor</p>
+          <div id="editorialRoles" class="service-stack"><p class="data-loading">Loading editorial roles…</p></div>
         </div>
+
+        <div class="peer-review-group" aria-labelledby="reviewHeading">
+          <h3 class="service-label" id="reviewHeading">Peer Review</h3>
+          <p class="service-subtitle">Journals for which I serve as Peer Reviewer</p>
+          <div id="reviewJournals" class="journal-grid"><p class="data-loading">Loading reviewing activity…</p></div>
+        </div>
+        <div id="doctoralReview" class="doctoral-review"></div>
       </div>
     </section>
 

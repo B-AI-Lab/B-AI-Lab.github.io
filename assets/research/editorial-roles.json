@@ -7,7 +7,13 @@
       "research_topic": "AI-Driven Interpretation of Human Physiology in Health, Medicine, and Education",
       "impact_factor_as_listed_in_cv": "3.8 (2025)",
       "url": "https://www.frontiersin.org/journals/digital-health",
-      "journal_visual": null,
+      "journal_visual": {
+        "src": "assets/images/journals/frontiers-digital-health.webp",
+        "alt": "Frontiers in Digital Health journal masthead",
+        "kind": "logo",
+        "preview_only": false,
+        "rights_status": "USER_AUTHORIZED_PUBLICATION_RIGHTS_UNCONFIRMED"
+      },
       "research_topic_id": "frontiers-physiology-ai-77661",
       "display_as_topic_leadership": true,
       "verification_note": "Topic Editor verified on the official Research Topic page. A distinct permanent journal-board appointment has not been independently verified; do not imply one."
@@ -18,7 +24,13 @@
       "role": "Editor",
       "impact_factor_as_listed_in_cv": "3.00 (2025)",
       "url": "https://www.frontiersin.org/journals/medicine",
-      "journal_visual": null
+      "journal_visual": {
+        "src": "assets/images/journals/frontiers-medicine.webp",
+        "alt": "Frontiers in Medicine journal masthead",
+        "kind": "logo",
+        "preview_only": false,
+        "rights_status": "USER_AUTHORIZED_PUBLICATION_RIGHTS_UNCONFIRMED"
+      }
     },
     {
       "journal": "Frontiers in Psychiatry",
@@ -27,7 +39,13 @@
       "section": "Digital Mental Health",
       "impact_factor_as_listed_in_cv": "3.80 (2026)",
       "url": "https://www.frontiersin.org/journals/psychiatry/sections/digital-mental-health",
-      "journal_visual": null
+      "journal_visual": {
+        "src": "assets/images/journals/frontiers-psychiatry.webp",
+        "alt": "Frontiers in Psychiatry journal masthead",
+        "kind": "logo",
+        "preview_only": false,
+        "rights_status": "USER_AUTHORIZED_PUBLICATION_RIGHTS_UNCONFIRMED"
+      }
     }
   ],
   "display_note": "Impact factors are retained from the CV for reference but should not be shown prominently on the website by default.",
@@ -37,7 +55,13 @@
     "role": "Topic Editor",
     "title": "AI-Driven Interpretation of Human Physiology in Health, Medicine, and Education",
     "url": "https://www.frontiersin.org/research-topics/77661/ai-driven-interpretation-of-human-physiology-in-health-medicine-and-education",
-    "journal_visual": null,
+    "journal_visual": {
+      "src": "assets/images/journals/frontiers-digital-health.webp",
+      "alt": "Frontiers in Digital Health journal masthead",
+      "kind": "logo",
+      "preview_only": false,
+      "rights_status": "USER_AUTHORIZED_PUBLICATION_RIGHTS_UNCONFIRMED"
+    },
     "verified_on": "2026-10-25"
   }
 }

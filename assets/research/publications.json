@@ -21,7 +21,13 @@
     ],
     "featured": true,
     "publication_date": "2025-09-26",
-    "journal_visual": null,
+    "journal_visual": {
+      "src": "assets/images/journals/frontiers-digital-health.webp",
+      "alt": "Frontiers in Digital Health journal masthead",
+      "kind": "logo",
+      "preview_only": false,
+      "rights_status": "USER_AUTHORIZED_PUBLICATION_RIGHTS_UNCONFIRMED"
+    },
     "metadata_source": "https://www.frontiersin.org/journals/digital-health/articles/10.3389/fdgth.2025.1670464/full"
   },
   {
@@ -590,7 +596,13 @@
     "publication_stage": "early_access",
     "authorship_role": "first_author",
     "metadata_source": "https://www.nature.com/articles/s41539-026-00459-x",
-    "journal_visual": null,
+    "journal_visual": {
+      "src": "assets/images/journals/npj-science-of-learning.webp",
+      "alt": "npj Science of Learning journal masthead",
+      "kind": "logo",
+      "preview_only": false,
+      "rights_status": "USER_AUTHORIZED_PUBLICATION_RIGHTS_UNCONFIRMED"
+    },
     "categories": [
       "Stress & Medical Education",
       "Psychophysiology"
